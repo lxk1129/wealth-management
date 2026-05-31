@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国高净值人士移民趋势 2020–2025</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; padding: 24px; max-width: 860px; margin: 0 auto; }
+  .header { margin-bottom: 20px; }
+  .tag { font-size: 12px; color: #888; margin-bottom: 6px; }
+  h1 { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #666; }
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+  .metric { background: #f5f5f5; border-radius: 8px; padding: 12px 14px; cursor: pointer; transition: background 0.2s; position: relative; }
+  .metric:hover { background: #ebebeb; }
+  .metric-label { font-size: 11px; color: #888; margin-bottom: 4px; }
+  .metric-value { font-size: 22px; font-weight: 500; color: #1a1a1a; }
+  .metric-sub { font-size: 11px; color: #888; margin-top: 3px; }
+  .tooltip-box { display: none; position: absolute; bottom: 110%; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap; z-index: 10; line-height: 1.6; }
+  .tooltip-box::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 5px solid transparent; border-top-color: #1a1a1a; }
+  .metric:hover .tooltip-box { display: block; }
+  .legend { display: flex; gap: 16px; margin-bottom: 8px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+  .chart-wrap { position: relative; width: 100%; height: 300px; }
+  .insights { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
+  .insight { background: #f5f5f5; border-radius: 8px; padding: 10px 12px; font-size: 12px; line-height: 1.7; color: #333; }
+  .sources { margin-top: 16px; padding-top: 14px; border-top: 1px solid #eee; font-size: 11px; color: #999; line-height: 1.8; }
+  .sources a { color: #378ADD; text-decoration: none; }
+  .sources a:hover { text-decoration: underline; }
+  @media (max-width: 600px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .insights { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <p class="tag">模块一：市场规模与人口数据</p>
+  <h1>中国百万富翁净流出人数（2020–2025）</h1>
+  <p class="subtitle">定义：可投资资产超过 $1M USD 的高净值人士 — 数据来源：Henley & Partners</p>
+</div>
+
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-label">2024年 峰值</div>
+    <div class="metric-value">15,200</div>
+    <div class="metric-sub">创历史记录，全球第一</div>
+    <div class="tooltip-box">2024年中国百万富翁流出15,200人<br>连续第十年位居全球第一<br>首选目的地：美国、加拿大、新加坡<br>来源：Henley & Partners 2024</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">2025年 预测</div>
+    <div class="metric-value">7,800</div>
+    <div class="metric-sub">全球第二，英国首次超越</div>
+    <div class="tooltip-box">2025年中国预计流出7,800人<br>英国以16,500人首次超越中国<br>深圳杭州科技产业吸引更多人留守<br>来源：Henley & Partners 2025</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">连续排名第一</div>
+    <div class="metric-value">10年</div>
+    <div class="metric-sub">2014–2024 全球流出最多</div>
+    <div class="tooltip-box">中国2014–2024年连续10年<br>位居全球高净值人士流出榜首<br>累计流出约10万人以上<br>来源：Henley & Partners系列报告</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">首选目的地</div>
+    <div class="metric-value">美国 🇺🇸</div>
+    <div class="metric-sub">其次为加拿大、新加坡</div>
+    <div class="tooltip-box">美国是中国富裕移民第一目的地<br>主要原因：教育、安全、资产保护<br>波士顿、洛杉矶、纽约华人HNW<br>集中聚居，财富规划需求巨大</div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#888;opacity:0.4;border:1.5px dashed #888;"></div> 估算值（COVID影响）</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#378ADD;"></div> 确认数据</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#639922;"></div> 2025年预测值</div>
+</div>
+
+<div class="chart-wrap">
+  <canvas id="chart" role="img" aria-label="中国高净值人士移民趋势，2020年约2000人至2024年峰值15200人，2025年预测回落7800人"></canvas>
+</div>
+
+<div class="insights">
+  <div class="insight">📈 2022–2024快速上升：疫情结束后积压需求集中释放，三年累计流出约4万人，推动跨境财富规划需求激增</div>
+  <div class="insight">📉 2025年回落至7,800人：深圳、杭州科技产业及私人银行发展使部分富裕人群选择留守，但流出趋势未停止</div>
+  <div class="insight">🏦 2026监管清洗：富途、老虎、长桥被处罚，灰色渠道基本封堵，合规华人投资者加速向美国持牌顾问迁移</div>
+  <div class="insight">💡 市场机遇：25万–100万美元可投资资产的在美华人家庭，处于私人银行门槛之下、智能投顾服务之上的"三不管"空白地带</div>
+</div>
+
+<div class="sources">
+  <strong>数据来源：</strong><br>
+  • <a href="https://www.henleyglobal.com/newsroom/press-releases/henley-private-wealth-migration-report-2025" target="_blank">Henley & Partners — Private Wealth Migration Report 2025</a><br>
+  • <a href="https://www.newsweek.com/china-exodus-millionaires-map-1915897" target="_blank">Newsweek — China Millionaire Exodus 2024</a><br>
+  • <a href="https://www.cnbc.com/2023/06/15/china-to-see-the-worlds-biggest-millionaire-exodus-this-year-study-shows-.html" target="_blank">CNBC — China Biggest Millionaire Exodus 2023</a><br>
+  • <a href="https://fortune.com/asia/2023/06/14/china-millionaires-leaving-migration-common-prosperity-henley-partners-private-wealth" target="_blank">Fortune — China Millionaires Migration 2023</a><br>
+  注：2020–2021年为COVID影响下估算值，全球移民人数从2019年110,000人骤降至2020年12,000人
+</div>
+
+<script>
+new Chart(document.getElementById('chart'), {
+  type: 'bar',
+  data: {
+    labels: ['2020', '2021', '2022', '2023', '2024', '2025\n预测'],
+    datasets: [
+      {
+        label: '估算值',
+        data: [2000, 7000, null, null, null, null],
+        backgroundColor: 'rgba(136,135,128,0.3)',
+        borderColor: '#888',
+        borderWidth: 1,
+        borderRadius: 4,
+      },
+      {
+        label: '确认数据',
+        data: [null, null, 10800, 13800, 15200, null],
+        backgroundColor: '#378ADD',
+        borderColor: '#185FA5',
+        borderWidth: 0,
+        borderRadius: 4,
+      },
+      {
+        label: '预测值',
+        data: [null, null, null, null, null, 7800],
+        backgroundColor: '#639922',
+        borderColor: '#3B6D11',
+        borderWidth: 0,
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          title: (items) => items[0].label + ' 年',
+          label: (item) => {
+            if (!item.raw) return '';
+            const labels = ['', '(COVID估算)', '(Henley确认)', '(Henley确认)', '(历史峰值)', '(2025预测)'];
+            return '  流出人数：' + item.raw.toLocaleString() + ' 人 ' + labels[item.dataIndex];
+          }
+        },
+        padding: 10,
+        titleFont: { size: 13 },
+        bodyFont: { size: 12 },
+      }
+    },
+    scales: {
+      x: {
+        stacked: true,
+        grid: { display: false },
+        ticks: { font: { size: 12 }, color: '#888' },
+        border: { display: false }
+      },
+      y: {
+        stacked: true,
+        beginAtZero: true,
+        max: 18000,
+        grid: { color: 'rgba(0,0,0,0.06)' },
+        border: { display: false },
+        ticks: {
+          font: { size: 11 },
+          color: '#888',
+          callback: (v) => v === 0 ? '0' : (v/1000).toFixed(0) + 'k'
+        }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>
